@@ -19,6 +19,7 @@ const BLOCK_TYPES = [
   { label: "リスト", style: "unordered-list-item" },
   { label: "番号付きリスト", style: "ordered-list-item" },
   { label: "Code Block", style: "code-block" },
+  { label: "hogehoge", style: "hogehoge" }
 ];
 
 type OptionProps = {

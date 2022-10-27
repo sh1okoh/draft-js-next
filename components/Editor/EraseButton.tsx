@@ -7,6 +7,7 @@ import { removeLocalStorageItem } from "./utils";
 
 const EraseButton = () => {
   const { id, editorState, setEditorState } = useContext(EditorContext);
+  console.log('editorState', editorState);
 
   // 空の文字列を現在のテキストとして設定
   const handleClick = () => {
