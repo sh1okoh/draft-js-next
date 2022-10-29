@@ -1,15 +1,24 @@
 import Editor from '@draft-js-plugins/editor';
 import '@draft-js-plugins/image/lib/plugin.css';
 import createImagePlugin from '@draft-js-plugins/image';
-import React, { useState } from 'react';
-import { convertFromRaw, EditorState, RawDraftContentState } from 'draft-js';
+import React, { useRef, useState } from 'react';
+import { Editor as DraftEditor, convertFromRaw, EditorState, RawDraftContentState } from 'draft-js';
 import imageEditorStyles from './imageEditorStyle.module.css';
+import { getInitialContent } from '../Editor/utils';
 
 const imagePlugin = createImagePlugin();
 const plugins = [imagePlugin]
 
-const ImageEditor = () => {
-  const [editorState, setEditorState] = useState({});
+type Props = {
+  id?: string;
+};
+
+const ImageEditor = ({ id }: Props) => {
+  const [editorState, setEditorState] = useState<EditorState>(
+    getInitialContent(id)
+  );
+  const editor = useRef<null | DraftEditor>(null);
+  
   const initialState: RawDraftContentState = {
     entityMap: {
       0: {
@@ -63,6 +72,7 @@ const ImageEditor = () => {
   };
 
   const onChange = (editorState: EditorState) => {
+    console.log('editorState', editorState);
     setEditorState(editorState)
   }
 
@@ -71,7 +81,7 @@ const ImageEditor = () => {
     <div className={imageEditorStyles.editor}>
       <Editor
         editorState={state.editorState}
-        onChange={(v) => console.log('v', v)}
+        onChange={(v) => onChange(v)}
         plugins={plugins}
       />
     </div>

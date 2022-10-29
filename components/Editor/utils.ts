@@ -4,6 +4,7 @@ import debounce from "lodash.debounce";
 export const saveContent = debounce((editorState: EditorState, id?: string) => {
   const contentState = editorState.getCurrentContent();
   const rawContentState = convertToRaw(contentState);
+  console.log('rawContentState', rawContentState);
   window.localStorage.setItem(
     id || "draftjscontent",
     JSON.stringify(rawContentState)
